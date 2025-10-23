@@ -1,4 +1,4 @@
-import Notas from "../models/Notas";
+import Notas from "../models/Notas.js";
 
 
 // Crear una nueva nota
