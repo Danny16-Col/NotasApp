@@ -1,6 +1,6 @@
 // esto es lo primero que se hace 
 import mongoose from 'mongoose';
-import cryptjs from 'cryptjs';
+import bcryptjs from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
@@ -12,14 +12,14 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', function (next) {
     if (!this.isModified('password')) return next();
 
-    const salt = cryptjs.genSaltSync(10);
-    this.password = cryptjs.hashSync(this.password, salt);
+    const salt = bcryptjs.genSaltSync(10);
+    this.password = bcryptjs.hashSync(this.password, salt);
     next();
 });
 
 // método para comparar contraseñas
 userSchema.methods.comparePassword = function (candidatePassword) {
-    return cryptjs.compareSync(candidatePassword, this.password);
+    return bcryptjs.compareSync(candidatePassword, this.password);
 };
 
 const User = mongoose.model('User', userSchema);

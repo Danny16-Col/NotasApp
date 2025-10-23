@@ -1,20 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import connectDB from './config/db.js';
 import notasRoutes from './routes/notasRoutes.js';
-
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
-// Coneccion a la base de datos
-connectDB();
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-
-app.use('/api/auth')
-app.use('/api/notes', notasRoutes );
-
+// Rutas
+app.use('/api/auth', authRoutes);
+app.use('/api/notes', notasRoutes);
 
 export default app;

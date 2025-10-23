@@ -1,6 +1,6 @@
 import express from 'express';
-import { getNotas, createNota, updateNota, deleteNota } from '../controllers/notasController.js';
-import protect from '../middleware/authMiddleware.js';
+import { getNotas, createNota, updateNota, deleteNota } from '../controllers/notasControler.js'
+import protect from '../middlewares/authMiddlewares.js';
 
 const router = express.Router();
 
