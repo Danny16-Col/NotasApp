@@ -5,9 +5,10 @@ import jwt from 'jsonwebtoken';
 
 //Token
 const generateToken = (id) => {
-    return jwt.sign({ id }), process.env.JWT_SECRET, {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '7h',
-    };
+    }
+    );
 }
 
 // Resgister
@@ -37,6 +38,7 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
+
         if (!user || !(await user.matchPassword(password))) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
         }
